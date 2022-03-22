@@ -25,6 +25,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5 COMPONENTS Core Widgets Network Multimedia)
 
+add_compile_definitions(QT_DISABLE_DEPRECATED_BEFORE=0x050F00)
+
 if(NOT BUILD_GL AND NOT BUILD_GLES2 AND NOT BUILD_GLES3)
 	message(WARNING "OpenGL is recommended to build the Qt port")
 endif()

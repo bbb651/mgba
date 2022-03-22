@@ -69,10 +69,10 @@ void LogController::postLog(int level, int category, const QString& string) {
 
 		if (m_logToStdout) {
 			QTextStream out(stdout);
-			out << line << endl;
+			out << line << Qt::endl;
 		}
 		if (m_logToFile && m_logStream) {
-			*m_logStream << line << endl;
+			*m_logStream << line << Qt::endl;
 		}
 	}
 	if (category == s_qtCat && level == mLOG_ERROR && this == &s_global) {

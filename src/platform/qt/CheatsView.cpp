@@ -149,7 +149,7 @@ void CheatsView::enterCheat() {
 		index = m_model.index(m_model.rowCount() - 1, 0, QModelIndex());
 		m_ui.cheatList->selectionModel()->select(index, QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
 	}
-	QStringList cheats = m_ui.codeEntry->toPlainText().split('\n', QString::SkipEmptyParts);
+	QStringList cheats = m_ui.codeEntry->toPlainText().split('\n', Qt::SkipEmptyParts);
 	for (const QString& string : cheats) {
 		m_model.beginAppendRow(index);
 		mCheatAddLine(set, string.toUtf8().constData(), m_codeType);

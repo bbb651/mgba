@@ -68,7 +68,11 @@ void DebuggerConsoleController::printf(struct CLIDebuggerBackend* be, const char
 	DebuggerConsoleController* self = consoleBe->self;
 	va_list args;
 	va_start(args, fmt);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+	self->log(QString::vasprintf(fmt, args));
+#else
 	self->log(QString().vsprintf(fmt, args));
+#endif
 	va_end(args);
 }
 
