@@ -194,11 +194,19 @@ CoreController::CoreController(mCore* core, QObject* parent)
 			}
 			va_list argc;
 			va_copy(argc, args);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+			message = QString::vasprintf(format, argc);
+#else
 			message = QString().vsprintf(format, argc);
+#endif
 			va_end(argc);
 			QMetaObject::invokeMethod(controller, "statusPosted", Q_ARG(const QString&, message));
 		}
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+		message = QString::vasprintf(format, args);
+#else
 		message = QString().vsprintf(format, args);
+#endif
 		QMetaObject::invokeMethod(controller, "logPosted", Q_ARG(int, level), Q_ARG(int, category), Q_ARG(const QString&, message));
 		if (level == mLOG_FATAL) {
 			mCoreThreadMarkCrashed(controller->thread());
